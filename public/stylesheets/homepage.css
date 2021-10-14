@@ -1,0 +1,23 @@
+body {
+    background-image: url("/images/cinema.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.cinema-ironhack {
+    position: absolute;
+    right: 100px;
+    top: 25%;
+    color: #eefaff;
+    font-size: 3em;
+    font-weight: 10;
+}
+
+.cinema-ironhack a {
+    text-decoration: none;
+    background-color: #eefaff;
+    padding: 15px;
+    border-radius: 30px;
+    color: rgb(75, 75, 161);
+    font-size: 0.7em;
+}

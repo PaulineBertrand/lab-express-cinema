@@ -1,28 +1,4 @@
-// ℹ️ package responsible to make the connection with mongodb
-// https://www.npmjs.com/package/mongoose
-const mongoose = require("mongoose");
-
-// ℹ️ Sets the MongoDB URI for our app to have access to it.
-// If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
-
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/lab-express-cinema";
-
-mongoose
-  .connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
-  })
-  .then((x) => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
-  })
-  .catch((err) => {
-    console.error("Error connecting to mongo: ", err);
-  });
-
-
-  const movies = [
+const movies = [
     {
       title: "A Wrinkle in Time",
       director: "Ava DuVernay",
@@ -104,4 +80,22 @@ mongoose
       showtimes: ["13:00", "15:30", "18:00", "20:10", "22:40"]
     }
   ];
+
+const mongoose = require("mongoose");
+const MovieModel = require("./../models/Movie.model.js");
+
+mongoose
+  .connect("mongodb://localhost/lab-express-cinema", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+  })
+  
+  .then(async (x) => {console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+  
+  const res = await MovieModel.insertMany(movies);
+  console.log(res.length + ' movies inserted in the database! great')
+  
+    }
+  )
+  .catch(err => console.error('Error connecting to mongo', err));
 
